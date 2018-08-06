@@ -9,3 +9,5 @@ export const warehouselimit = (pagesize,currentPage) =>  fetch('/user/limit', {
 },"post");
 export const warehousecount = (pagesize,currentPage) =>  fetch('/user/count', {
 },"post");
+export const getindexmenu = () =>  fetch('/init/getindexmenu', {
+},"post");

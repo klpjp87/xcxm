@@ -20,7 +20,8 @@
 
 </template>
 <script>
-import {menu} from '../../../service/data'
+//import {menu} from '../../../service/data'
+import {getindexmenu} from '../../../service/getData'
 export default {
    data(){
        return {
@@ -40,14 +41,20 @@ export default {
     }, 
     methods: {
         handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+       // console.log(key, keyPath);
     },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        //console.log(key, keyPath);
       }
     },
-    mounted(){
-        this.items = menu
+    async mounted(){
+        let res = await getindexmenu()
+        if(res.status = 1 ){
+            this.items = res.data
+        }else{
+            alert(status.data)
+        }
+        
     }
 }
 </script>
