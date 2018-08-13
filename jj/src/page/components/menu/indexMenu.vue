@@ -21,7 +21,8 @@
 </template>
 <script>
 //import {menu} from '../../../service/data'
-import {getindexmenu} from '../../../service/getData'
+//import {getindexmenu} from '../../../service/getData'
+import {getindexmenu} from '@/service/getData'
 export default {
    data(){
        return {

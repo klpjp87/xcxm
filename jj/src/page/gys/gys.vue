@@ -1,43 +1,62 @@
 
 <template>
     <div class="level-bread">
-      <el-breadcrumb separator="/">
-        <el-breadcrumb-item v-for="item in realList" :to="item.path" :key="item.id">{{item.name}}</el-breadcrumb-item>
-      </el-breadcrumb>
+      <mbx></mbx>
+    <div>
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%">
+      <el-table-column
+        prop="name"
+        label="商品"
+        width="180">
+      </el-table-column>
+      <el-table-column
+        prop="price"
+        label="价格">
+      </el-table-column>
+    </el-table>
+      <div class="block">
+        <el-pagination
+        :current-page = currentPage 
+        :page-size = pagesize
+          layout="prev, pager, next"
+          :total=totalCount>
+        </el-pagination>
+      </div>
+  </div>
       <router-link to='/index/gys/WareHouse'>11111</router-link>
         <router-view/>
     </div>
 </template>
  
 <script>
+    import mbx from '../components/common/mbx'
     export default {
       name: "lelve-bread",
-      created(){
-        this.getRoutePath();
-      },
+
       data() {
         return {
-          realList: [
-            
-          ]
-        }
-      },
-      methods:{
-        getRoutePath() {
-          this.realList = this.$route.meta.routeList;
-          console.log(this.realList)        
+          tableData: [{
+            name: '',
+            prices: ''
+          }],
+          pagesize: 20,
+          currentPage: 1,
+          totalCount: 50,          
           }
       },
-      beforeRouteEnter(to,from, next) {
-        next((vm) => {
-          vm.realList = to.meta.routeList;
-        });
+      components:{
+        mbx,
       },
-      // watch:{
-      //   $route:function(newV,oldV) {
-      //     this.realList =newV.meta.routeList;
-      //   }
-      // }
+   async mounted(){
+        // var data  = await warehouselimit(this.pagesize,this.currentPage)
+        // this.tableData = data.data
+        // data = await warehousecount()
+        // this.totalCount  = data.count
+        // console.log(await fetch('/supplier/findByMaterialId', {Material_id:2},"post"))
+    },
     }
 </script>
 <style>
