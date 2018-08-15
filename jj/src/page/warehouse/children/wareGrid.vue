@@ -3,7 +3,10 @@
     <el-table
       :data="tableData"
       border
-      style="width: 100%">
+      style="width:100%"
+      class ="table"
+      max-height=400
+      >
       <el-table-column
         prop="name"
         label="商品"
@@ -63,5 +66,7 @@ import fetch from '../../../config/fetch'
 .block{
   float: right;
 }
-
+.table td{
+  height:35px;
+}
 </style>

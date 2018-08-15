@@ -20,13 +20,14 @@
             </div>
         </form>
         <ware-grid></ware-grid>
+        <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
     </el-main>
 </el-container>
 </template>
 <script>
 import {savewarehouse} from '../../service/getData'
 import wareGrid from './children/wareGrid'
-
+import alertTip from '../components/common/alertTip'
 export default {
     data(){
         return {
@@ -35,11 +36,16 @@ export default {
                 price:0
             },
             activeIndex:"1",
+            showAlert: false,
+             alertText: null,
         }
     },
     methods:{
        handleSelect(key, keyPath){
         console.log(key, keyPath);
+        this.alertText = "110";
+        this.showAlert = true;
+        
       },
      async postpois(){
         let res = await savewarehouse(this.shopdetail)
@@ -54,7 +60,8 @@ export default {
         
     },
     components:{
-        wareGrid
+        wareGrid,
+        alertTip,
     },
     computed:{
                 inpNum:{

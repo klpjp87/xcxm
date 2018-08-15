@@ -3,18 +3,17 @@
     <div class="level-bread">
       <mbx></mbx>
     <div>
-    <el-table
-      :data="tableData"
-      border
-      style="width: 100%">
-      <el-table-column
-        prop="name"
-        label="商品"
-        width="180">
+
+      <el-button-group>
+        <el-button  plain size="mini" icon="el-icon-plus"></el-button>
+        <el-button  plain icon="el-icon-edit" size="mini"></el-button>
+        <el-button  plain icon="el-icon-delete" size="mini"></el-button>
+      </el-button-group>
+
+    <el-table :data="tableData" border style="width:100%" class="table" height=400>
+      <el-table-column prop="name" label="商品" width="180">
       </el-table-column>
-      <el-table-column
-        prop="price"
-        label="价格">
+      <el-table-column prop="price" label="价格">
       </el-table-column>
     </el-table>
       <div class="block">
@@ -39,8 +38,8 @@
       data() {
         return {
           tableData: [{
-            name: '',
-            prices: ''
+            name: null,
+            prices: null
           }],
           pagesize: 20,
           currentPage: 1,
@@ -60,7 +59,18 @@
     }
 </script>
 <style>
+
 .el-breadcrumb__item{
-  width:100px;
+  width:auto;
+}
+.el-button-group{
+  float: right;
+  margin-bottom: 5px;
+}
+.el-button{
+  margin-bottom: 2px;
+}
+.el-table__row td{
+  padding:6px 0;
 }
 </style>
