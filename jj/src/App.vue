@@ -22,4 +22,14 @@ export default {
 a{ 
   text-decoration: none;
 }
+.el-table__row td{
+  padding:6px 0;
+}
+.el-input{
+display: inline-block;
+width:auto;
+}
+.el-input__inner,.el-input,.el-form-item{
+    height:35px;
+}
 </style>

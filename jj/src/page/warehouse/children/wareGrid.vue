@@ -66,7 +66,5 @@ import fetch from '../../../config/fetch'
 .block{
   float: right;
 }
-.table td{
-  height:35px;
-}
+
 </style>

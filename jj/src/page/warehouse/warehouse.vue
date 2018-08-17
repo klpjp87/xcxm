@@ -84,12 +84,8 @@ export default {
 }
 </script>
 <style>
-.el-input{
-    width:200px;
-}
-.el-input__inner{
-    height:30px;
-}
+
+
 .jj-form-row{
     margin-top:5px;
 }

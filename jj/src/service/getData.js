@@ -11,3 +11,6 @@ export const warehousecount = (pagesize,currentPage) =>  fetch('/user/count', {
 },"post");
 export const getindexmenu = () =>  fetch('/init/getindexmenu', {
 },"post");
+export const addgys = (gys) =>  fetch('/gys/add', {
+	gys:gys
+},"post");
