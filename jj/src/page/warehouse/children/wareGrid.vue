@@ -63,8 +63,6 @@ import fetch from '../../../config/fetch'
   }
 </script>
 <style>
-.block{
-  float: right;
-}
+
 
 </style>

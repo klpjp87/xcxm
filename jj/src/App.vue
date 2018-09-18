@@ -32,4 +32,7 @@ width:auto;
 .el-input__inner,.el-input,.el-form-item{
     height:35px;
 }
+.block{
+  float: right;
+}
 </style>

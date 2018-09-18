@@ -5,9 +5,9 @@
     <div>
 <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
       <el-button-group>
-        <el-button  plain size="mini" icon="el-icon-plus" @click="opengys"></el-button>
-        <el-button  plain icon="el-icon-edit" size="mini" @click="editgys"></el-button>
-        <el-button  plain icon="el-icon-delete" size="mini" @click="deletegys"></el-button>
+        <el-button  plain size="mini" icon="el-icon-plus" @click="opencustom"></el-button>
+        <el-button  plain icon="el-icon-edit" size="mini" @click="editcustom"></el-button>
+        <el-button  plain icon="el-icon-delete" size="mini" @click="deletecustom"></el-button>
       </el-button-group>
 
     <el-table :data="tableData" ref="multipleTable" border style="width:100%" class="table" height=409 highlight-current-row @current-change="handleCurrentChange" @row-dblclick = "rowdblclcik" >
@@ -29,8 +29,6 @@
         </el-pagination>
       </div>
   </div>
-        <router-link to='/index/gys/WareHouse'>11111</router-link>
-        <router-view/>
         <el-dialog :title="dialogFormtitle" :visible.sync="dialogFormVisible" width = "400px" >
           <el-form :model="form">
                
@@ -52,7 +50,7 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="emptyform">取 消</el-button>
-            <el-button type="primary" @click="commitgys" >确 定</el-button>
+            <el-button type="primary" @click="commitcustom" >确 定</el-button>
           </div>
         </el-dialog>
         
@@ -62,9 +60,9 @@
  
 <script>
     import mbx from '../components/common/mbx'
-    import {addgys,updategys,deletegysbyid} from '../../service/getData'
+    import {addcustom,updatecustom,deletecustombyid} from '../../service/getData'
     import alertTip from '../components/common/alertTip'
-    import {gyslimit} from '../../service/getData'
+    import {customlimit} from '../../service/getData'
     export default {
       name: "lelve-bread",
 
@@ -105,7 +103,7 @@
       },
    async mounted(){
         this.limit(1)
-        //  var data  = await gyslimit(this.pagesize,this.currentPage)
+        //  var data  = await customlimit(this.pagesize,this.currentPage)
         //  if(data.status==1){
         //     this.tableData = data.data
         //     this.totalCount = data.count
@@ -126,7 +124,7 @@
             async limit(currentPage){
               console.log("currentPage"+currentPage)
               this.currentPage = currentPage
-              var data  =  await gyslimit(this.pagesize,this.currentPage)
+              var data  =  await customlimit(this.pagesize,this.currentPage)
 
               if(data.status==1){
                 this.tableData = data.data
@@ -144,8 +142,8 @@
               // this.currentRow = this.tableData[0]
               // this.$refs.multipleTable.setCurrentRow(this.tableData[0])
             },
-            opengys(){
-                console.log("addgys")
+            opencustom(){
+                console.log("addcustom")
                 this.form = {
                   id:null,
                   name: null,//姓名
@@ -155,25 +153,25 @@
                   Fax:null,//传真
                 }
                 this.dialogFormVisible = true
-                this.dialogFormtitle = "添加供应商"
+                this.dialogFormtitle = "添加客户"
                 this.dialogFormtype = "add"
                 console.log(this.currentPage)
             },
-            editgys(){
-              console.log("editgys")
+            editcustom(){
+              console.log("editcustom")
               if(this.currentRow){
                 console.log(this.currentRow)
               }
               this.dialogFormVisible = true
-              this.dialogFormtitle = "修改供应商"
+              this.dialogFormtitle = "修改客户"
               this.dialogFormtype = "edit"
               this.form = this.currentRow
 
             },
             rowdblclcik(row,event){
-              this.editgys()
+              this.editcustom()
             },
-            async commitgys(){
+            async commitcustom(){
               console.log(this.form)
               if(this.form.name == "" || this.form.name == null){
                 this.showAlert = true
@@ -181,7 +179,7 @@
                 return 
               }
               if(this.dialogFormtype == "add"){
-                const res =  await addgys(this.form)
+                const res =  await addcustom(this.form)
                 if(res.status == 1 ){
                   this.emptyform()
                   // this.showAlert = true
@@ -202,7 +200,7 @@
                   this.alertText = res.message
                 }
               }else if(this.dialogFormtype == "edit"){
-                const res =await updategys(this.form)
+                const res =await updatecustom(this.form)
                 if(res.status == 1 ){
                   // this.showAlert = true
                   // this.alertText = '修改成功'
@@ -223,13 +221,13 @@
                 }
               }
             },
-            deletegys(){
+            deletecustom(){
               this.$confirm('此操作将永久删除 '+this.currentRow.name+', 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
               }).then(async () => {
-                const res = await deletegysbyid(this.currentRow.id)
+                const res = await deletecustombyid(this.currentRow.id)
                 if(res.status == 1 ){
                   this.$message({
                     type: 'success',

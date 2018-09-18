@@ -44,7 +44,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 200;
+        z-index: 9999;
+        
     }
     .tip_text_container{
         position: absolute;
@@ -61,8 +62,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        border: 1px;
         border-radius: 0.25rem;
+        border:1px;
+        box-shadow:0 2px 12px 0 rgba(0,0,0,.1);
     }
     .tip_text_container    .tip_icon{
             width:3rem;
@@ -101,7 +103,7 @@
             color: #fff;
             font-weight: bold;
             margin-top: .8rem;
-            background-color: #4cd964;
+            background-color: rgb(64,158,255);
             width: 100%;
             text-align: center;
             line-height: 1.8rem;

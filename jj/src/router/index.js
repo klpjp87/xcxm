@@ -7,7 +7,7 @@ const WareHouse = r => require.ensure([], () => r(require('../page/warehouse/war
 const index = r => require.ensure([], () => r(require('../page/index/index')), 'index')
 const indexMenu = r => require.ensure([], () => r(require('../page/components/menu/indexMenu')), 'indexMenu')
 const gys = r => require.ensure([], () => r(require('../page/gys/gys')), 'gys')
-
+const custom = r => require.ensure([], () => r(require('../page/custom/custom')), 'custom')
 export default new Router({
   routes: [{
     path: '/',
@@ -28,7 +28,12 @@ export default new Router({
               component: WareHouse
             },
             {
-              name:"供应商管理",
+              name:"客户信息",
+              path:'custom',
+              component: custom,
+            },
+            {
+              name:"供应商信息",
               path:'gys',
               component: gys,
               children:[
