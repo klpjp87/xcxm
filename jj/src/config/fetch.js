@@ -1,9 +1,10 @@
 import {baseUrl} from './env'
-
+import {getStore} from '@/config/util'
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
-	
+	var token
+	token = getStore("token")
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
 		Object.keys(data).forEach(key => {
@@ -22,7 +23,8 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			method: type,
 			headers: {
 			  'Accept': 'application/json',
-			  'Content-Type' : 'application/json'
+			  'Content-Type' : 'application/json',
+			  'Authorization': 'Bearer ' + token
 			},
 			mode: "cors",
 			cache: "force-cache"
@@ -57,6 +59,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 
 			requestObj.open(type, url, true);
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			requestObj.setRequestHeader("Authorization", 'Bearer ' + token);
 			requestObj.send(sendData);
 
 			requestObj.onreadystatechange = () => {

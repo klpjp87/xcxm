@@ -5,9 +5,15 @@
     <div>
 <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
       <el-button-group>
-        <el-button  plain size="mini" icon="el-icon-plus" @click="opengys"></el-button>
-        <el-button  plain icon="el-icon-edit" size="mini" @click="editgys"></el-button>
-        <el-button  plain icon="el-icon-delete" size="mini" @click="deletegys"></el-button>
+        <el-tooltip content="增加" placement="bottom" effect="light">
+          <el-button  plain size="mini" icon="el-icon-plus" @click="opengys"></el-button>
+        </el-tooltip>
+        <el-tooltip content="修改" placement="bottom" effect="light">
+          <el-button  plain icon="el-icon-edit" size="mini" @click="editgys"></el-button>
+        </el-tooltip>
+        <el-tooltip content="删除" placement="bottom" effect="light">
+          <el-button  plain icon="el-icon-delete" size="mini" @click="deletegys"></el-button>
+        </el-tooltip>
       </el-button-group>
 
     <el-table :data="tableData" ref="multipleTable" border style="width:100%" class="table" height=409 highlight-current-row @current-change="handleCurrentChange" @row-dblclick = "rowdblclcik" >
@@ -51,7 +57,7 @@
             </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="emptyform">取 消</el-button>
+            <el-button @click= "dialogFormVisible = false">取 消</el-button>
             <el-button type="primary" @click="commitgys" >确 定</el-button>
           </div>
         </el-dialog>

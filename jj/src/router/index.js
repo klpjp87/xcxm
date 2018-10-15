@@ -8,6 +8,8 @@ const index = r => require.ensure([], () => r(require('../page/index/index')), '
 const indexMenu = r => require.ensure([], () => r(require('../page/components/menu/indexMenu')), 'indexMenu')
 const gys = r => require.ensure([], () => r(require('../page/gys/gys')), 'gys')
 const custom = r => require.ensure([], () => r(require('../page/custom/custom')), 'custom')
+const login = r => require.ensure([], () => r(require('../page//login')), 'login')
+
 export default new Router({
   routes: [{
     path: '/',
@@ -17,7 +19,13 @@ export default new Router({
         {
             name:"首页",
             path: '',
-            redirect: '/index'
+            redirect: '/login'
+            //redirect: '/index'
+        },
+        {
+          name:"登录",
+          path: '/login',
+          component:login,
         },
         {
           path: '/index',

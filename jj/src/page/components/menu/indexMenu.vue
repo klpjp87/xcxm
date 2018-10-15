@@ -22,7 +22,7 @@
 <script>
 //import {menu} from '../../../service/data'
 //import {getindexmenu} from '../../../service/getData'
-import {getindexmenu} from '@/service/getData'
+import {getindexmenu,token} from '@/service/getData'
 export default {
    data(){
        return {
@@ -50,6 +50,7 @@ export default {
     },
     async mounted(){
         let res = await getindexmenu()
+        //console.log("tooken:",await token())
         if(res.status = 1 ){
             this.items = res.data
         }else{

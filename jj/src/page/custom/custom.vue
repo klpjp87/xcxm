@@ -5,9 +5,15 @@
     <div>
 <alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"></alert-tip>
       <el-button-group>
-        <el-button  plain size="mini" icon="el-icon-plus" @click="opencustom"></el-button>
-        <el-button  plain icon="el-icon-edit" size="mini" @click="editcustom"></el-button>
-        <el-button  plain icon="el-icon-delete" size="mini" @click="deletecustom"></el-button>
+        <el-tooltip content="增加" placement="bottom" effect="light">
+          <el-button  plain size="mini" icon="el-icon-plus" @click="opencustom"></el-button>
+        </el-tooltip>
+        <el-tooltip content="修改" placement="bottom" effect="light">        
+          <el-button  plain icon="el-icon-edit" size="mini" @click="editcustom"></el-button>
+        </el-tooltip>
+        <el-tooltip content="删除" placement="bottom" effect="light">
+          <el-button  plain icon="el-icon-delete" size="mini" @click="deletecustom"></el-button>
+        </el-tooltip>
       </el-button-group>
 
     <el-table :data="tableData" ref="multipleTable" border style="width:100%" class="table" height=409 highlight-current-row @current-change="handleCurrentChange" @row-dblclick = "rowdblclcik" >

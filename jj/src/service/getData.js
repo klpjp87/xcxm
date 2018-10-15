@@ -38,3 +38,5 @@ export const customlimit = (pagesize,currentPage) =>  fetch('/custom/limit', {
 	pageSize: pagesize,
 	currentPage:currentPage
 },"post");
+export const token = () =>  fetch('/init/token', {
+},"post");
