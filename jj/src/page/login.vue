@@ -5,14 +5,14 @@
       <div class="fields">
           <el-input
             class="field"
-            v-model="login.account"
+            v-model="admin.account"
             placeholder="账号" 
           >
           </el-input>
-        
+<vuc-input type='rect' v-model="admin.account"></vuc-input>
           <el-input
             class="field"
-            v-model="login.password"
+            v-model="admin.password"
             type="password" 
             placeholder="密码" 
             @keyup.native.enter="check"
@@ -23,7 +23,7 @@
       <div class="submit">
         <el-button
           style='width:100%;' 
-          @click.native="check"
+          @click.native="adminlogin"
           type="primary"
           :loading="loading"
         >
@@ -31,7 +31,7 @@
         </el-button>
       </div>
       <div class="other">
-        <el-button type="text"  class='blacktext'>忘记密码</el-button> | <el-button type="text"  class='blacktext'>注册用户</el-button>
+        <el-button type="text"  class='blacktext'>忘记密码</el-button> | <el-button type="text"  class='blacktext' @click="register">注册用户</el-button>
       </div>
       <div class="other">
        第三方登录
@@ -42,14 +42,19 @@
     </Form>
      <canvas id='canvas'></canvas>
   </section>
+  
 </template>
 
 <script>
+  import {token} from '@/service/getData'
+  import {setStore} from '@/config/util'
   import { render } from '@/config/canvas'
+  import {register,login} from '@/service/getData'
+  import {mapMutations, mapState} from 'vuex'
   export default {
     data () {
       return {
-        login: {
+        admin: {
           account: '',
           password: ''
         },
@@ -57,50 +62,63 @@
         loading: false
       }
     },
+    computed:{
+      ...mapState([
+          'showAlert', 'alertText'
+      ]), 
+    },
     methods: {
+    ...mapMutations([
+      'showAlerttext','setuserinfo'
+    ]),
+    async register(){
+        if (this.admin.account === '') {
+          this.showAlerttext("账号不能为空")
+          return
+        }
+        if (this.admin.password === '') {
+          this.showAlerttext("密码不能为空")
+          return
+        } else if (this.admin.password.length < 6) {
+          this.showAlerttext("密码不能少于6个字符")
+          return
+        } else {
+          await register({user_name:this.admin.account,password:this.admin.password})
+        }
+      },
       render: render,
-    //   check () {
-    //     if (this.login.account === '') {
-    //       return this.$Notice.error({
-    //         title: '用户名不能为空',
-    //         duration: 2
-    //       })
-    //     }
-    //     if (this.login.password === '') {
-    //       return this.$Notice.error({
-    //         title: '密码不能为空',
-    //         duration: 2
-    //       })
-    //     } else if (this.login.password.length < 6) {
-    //       return this.$Notice.error({
-    //         title: '密码不能少于6个字符',
-    //         duration: 2
-    //       })
-    //     } else {
-    //       this.loading = true
-    //       if (
-    //         this.login.account !== localStorage.getItem('username') ||
-    //         this.login.password !== localStorage.getItem('password')
-    //       ) {
-    //         this.loading = false
-    //         return this.$Notice.error({
-    //           title: '用户名或密码错误',
-    //           duration: 2
-    //         })
-    //       } else {
-    //         this.loading = false
-    //         setTimeout(() => {
-    //           this.$Notice.success({
-    //             title: '登录成功',
-    //             duration: 2
-    //           })
-    //         }, 1000)
-    //         this.$router.push({
-    //           name: 'index'
-    //         })
-    //       }
-    //     }
-    //   }
+      async adminlogin () {
+        if (this.admin.account === '') {
+          this.showAlerttext("账号不能为空")
+          return
+        }
+        if (this.admin.password === '') {
+          this.showAlerttext("密码不能为空")
+          return
+        } else if (this.admin.password.length < 6) {
+          this.showAlerttext("密码不能少于6个字符")
+          return
+        } else {
+          this.loading = true
+          let res = await login({user_name:this.admin.account,password:this.admin.password})
+          console.log(res,res.status)
+          if (
+            res.status == 0
+          ) {
+            this.loading = false
+            this.showAlerttext("用户名或密码错误")
+            return
+          } else {
+            var usertoken = await token({user_name:this.admin.account})
+            console.log(usertoken)
+            setStore("token",usertoken.token)
+            this.loading = false
+            this.setuserinfo({user_name:this.admin.account})
+            this.$router.push({path:'/index'});
+            //this.showAlerttext("登录成功")
+          }
+        }
+      }
     },
     // watch: {
     //   '$route' () {
@@ -128,7 +146,7 @@
     height: 100%;
     background: white;
   }
-  .login-wrap  canvas {
+  .login-wrap>canvas {
       width: 100%;
       height: 100%;
             position:fixed;

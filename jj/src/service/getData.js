@@ -11,7 +11,10 @@ export const gyslimit = (pagesize,currentPage) =>  fetch('/gys/limit', {
 	pageSize: pagesize,
 	currentPage:currentPage
 },"post");
-
+export const warelimit = (pagesize,currentPage) =>  fetch('/ware/limit', {
+	pageSize: pagesize,
+	currentPage:currentPage
+},"post");
 export const warehousecount = (pagesize,currentPage) =>  fetch('/user/count', {
 },"post");
 export const getindexmenu = () =>  fetch('/init/getindexmenu', {
@@ -25,7 +28,7 @@ export const updategys = (gys) =>  fetch('/gys/updateone', {
 export const deletegysbyid = (id) =>  fetch('/gys/deletebyid', {
 	id:id
 },"post");
-export const addcustom = (custom) =>  fetch('/custom/add', {
+export const addcustom = (custom) =>  fetch('/custeom/add', {
 	custom:custom
 },"post");
 export const updatecustom = (custom) =>  fetch('/custom/updateone', {
@@ -34,9 +37,30 @@ export const updatecustom = (custom) =>  fetch('/custom/updateone', {
 export const deletecustombyid = (id) =>  fetch('/custom/deletebyid', {
 	id:id
 },"post");
+export const addware = (custom) =>  fetch('/ware/add', {
+	ware:custom
+},"post");
+export const updateware = (cestom) =>  fetch('/ware/updateone', {
+	ware:custom
+},"post");
+export const deletewarebyid = (id) =>  fetch('/ware/deletebyid', {
+	id:id
+},"post");
 export const customlimit = (pagesize,currentPage) =>  fetch('/custom/limit', {
 	pageSize: pagesize,
 	currentPage:currentPage
 },"post");
-export const token = () =>  fetch('/init/token', {
+export const token = (admin) =>  fetch('/init/token', {
+	custom:admin
+},"post");
+export const register = (admin) =>  fetch('/admin/register', {
+	custom:admin
+},"post");
+export const login = (admin) =>  fetch('/admin/login', {
+	custom:admin
+},"post");
+export const getdict = (dictname,code,childcode) =>  fetch('/dict/getdict', {
+	dictname:dictname,
+	dictcode:code,
+	childcode:childcode
 },"post");

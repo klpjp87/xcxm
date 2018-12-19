@@ -1,5 +1,6 @@
 import {baseUrl} from './env'
 import {getStore} from '@/config/util'
+import App from '@/main.js'
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
@@ -29,7 +30,6 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			mode: "cors",
 			cache: "force-cache"
 		}
-
 		if (type == 'POST') {
 			Object.defineProperty(requestConfig, 'body', {
 				value: JSON.stringify(data)
@@ -39,6 +39,10 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 		try {
 			const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
+			if(responseJson.status == 401){
+				alert("登陆超时")
+				await App.$router.push({path:'/login'});
+			}
 			return responseJson
 		} catch (error) {
 			throw new Error(error)
@@ -61,7 +65,6 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			requestObj.setRequestHeader("Authorization", 'Bearer ' + token);
 			requestObj.send(sendData);
-
 			requestObj.onreadystatechange = () => {
 				if (requestObj.readyState == 4) {
 					if (requestObj.status == 200) {

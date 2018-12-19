@@ -1,14 +1,30 @@
 <template>
-  <div id="app">
+  <div id="app" v-cloak>
     <router-view/>
+    <alert-tip v-if="this.showAlert" @closeTip="closeAlert" :alertText="this.alertText"></alert-tip>
   </div>
 </template>
 
 <script>
 import indexMenu from './page/components/menu/indexMenu'
+  import alertTip from '@/page/components/common/alertTip'
+  import {mapMutations, mapState} from 'vuex'
 export default {
-  name: 'App'
-}
+  name: 'App',
+  components:{
+    alertTip,
+  },
+  computed:{
+    ...mapState([
+        'showAlert', 'alertText'
+    ]),   
+  },
+  methods: {
+    ...mapMutations([
+      'closeAlert'
+    ]),
+  },
+}      
 </script>
 
 <style>
@@ -56,5 +72,8 @@ width:auto;
 }
 .block{
   float: right;
+}
+[v-cloak] {
+    display: none !important;
 }
 </style>

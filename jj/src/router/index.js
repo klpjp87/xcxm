@@ -7,6 +7,7 @@ const WareHouse = r => require.ensure([], () => r(require('../page/warehouse/war
 const index = r => require.ensure([], () => r(require('../page/index/index')), 'index')
 const indexMenu = r => require.ensure([], () => r(require('../page/components/menu/indexMenu')), 'indexMenu')
 const gys = r => require.ensure([], () => r(require('../page/gys/gys')), 'gys')
+const ware = r => require.ensure([], () => r(require('../page/ware/ware')), 'ware')
 const custom = r => require.ensure([], () => r(require('../page/custom/custom')), 'custom')
 const login = r => require.ensure([], () => r(require('../page//login')), 'login')
 
@@ -19,16 +20,16 @@ export default new Router({
         {
             name:"首页",
             path: '',
-            redirect: '/login'
+            redirect: 'login'
             //redirect: '/index'
         },
         {
           name:"登录",
-          path: '/login',
+          path: 'login',
           component:login,
         },
         {
-          path: '/index',
+          path: 'index',
           children:[//首页菜单
             {
               name:"WareHouse",
@@ -40,6 +41,11 @@ export default new Router({
               path:'custom',
               component: custom,
             },
+            {
+              name:"商品信息",
+              path:'ware',
+              component: ware,
+            },           
             {
               name:"供应商信息",
               path:'gys',

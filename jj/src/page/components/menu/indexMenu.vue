@@ -20,9 +20,11 @@
 
 </template>
 <script>
+  import {mapMutations, mapState} from 'vuex'
+  import {setStore} from '@/config/util'
 //import {menu} from '../../../service/data'
 //import {getindexmenu} from '../../../service/getData'
-import {getindexmenu,token} from '@/service/getData'
+import {getindexmenu,token,getdict} from '@/service/getData'
 export default {
    data(){
        return {
@@ -48,15 +50,24 @@ export default {
         //console.log(key, keyPath);
       }
     },
+    computed:{
+      ...mapState([
+          'user_name',
+      ]),   
+    },
     async mounted(){
         let res = await getindexmenu()
         //console.log("tooken:",await token())
-        if(res.status = 1 ){
-            this.items = res.data
-        }else{
-            alert(status.data)
-        }
-        
+        if(res.status == 1 ){
+            this.items = res.data  
+        }    
+        console.log(JSON.stringify(this.items))  
+        // res = await getdict("",1,1)
+        //  console.log(JSON.stringify(res))
+        // }else if(res.status==401){
+        //    alert("登陆超时")
+        //    this.$router.push({path:'/login'});
+        // }
     }
 }
 </script>

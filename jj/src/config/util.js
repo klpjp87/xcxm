@@ -38,3 +38,8 @@ export const getStyle = (element, attr, NumberMode = 'int') => {
     //在获取 opactiy 时需要获取小数 parseFloat
     return  NumberMode == 'float'? parseFloat(target) : parseInt(target);
 } 
+export const getType = (value) =>{  //基本上可以返回所有的类型，不论你是自定义还是原生
+    return Object.prototype.toString.call(value).match(/\s{1}(\w+)/)[1];
+}
+
+

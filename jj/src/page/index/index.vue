@@ -22,8 +22,8 @@
 </template>
 <script>
 import indexMenu from '../components/menu/indexMenu'
-import {token} from '@/service/getData'
-import {setStore} from '@/config/util'
+
+
 export default {
     data(){
             return {
@@ -32,10 +32,6 @@ export default {
     components:{
         indexMenu
     },
-    async mounted(){
-        var usertoken = await token()
-        setStore("token",usertoken.token)
-    }
 }
 </script>
 <style>

@@ -6,10 +6,12 @@ import router from './router'
 import store from './store/'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import vucInput from 'vuc-input'
 //////import 'element-ui/lib/theme-chalk/index.css';
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 Vue.use(ElementUI)
+Vue.use(vucInput)
 var routeList = []
 
 router.beforeEach((to, from, next) => {
@@ -44,7 +46,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 console.log(22,routeList)
-new Vue({
+export default new Vue({
   el: '#app',
   router,
   store,
